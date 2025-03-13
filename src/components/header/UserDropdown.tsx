@@ -23,7 +23,9 @@ export default function UserDropdown() {
           <img src="https://lh3.googleusercontent.com/a/ACg8ocJZxPlxJ0vdzQOgIHBG3o82Pemn_q90zSDx2hMrR_B5FpAfvr0=s288-c-no" alt="User" />
         </span>
 
+        <span className="block mr-1 font-medium text-theme-sm"><b>{`[Owner]`}</b></span>
         <span className="block mr-1 font-medium text-theme-sm">Federico</span>
+        
         <svg
           className={`stroke-gray-500 dark:stroke-gray-400 transition-transform duration-200 ${
             isOpen ? "rotate-180" : ""

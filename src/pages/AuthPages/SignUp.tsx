@@ -1,8 +1,18 @@
 import PageMeta from "../../components/common/PageMeta";
 import AuthLayout from "./AuthPageLayout";
 import SignUpForm from "../../components/auth/SignUpForm";
+import { AuthContext } from "../../context/AuthContext";
+import { useContext } from "react";
+import { Navigate } from "react-router";
 
 export default function SignUp() {
+
+  const { isAuthenticated } = useContext(AuthContext) as { isAuthenticated: boolean }
+
+  if (isAuthenticated) {
+    return <Navigate to={"/"} />
+  }
+
   return (
     <>
       <PageMeta
