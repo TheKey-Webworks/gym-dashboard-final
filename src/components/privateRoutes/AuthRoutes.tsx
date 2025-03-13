@@ -5,7 +5,7 @@ import { Navigate, Outlet } from 'react-router'
 const AuthRoutes = () => {
 
   const { isAuthenticated } = useContext(AuthContext) as { isAuthenticated: boolean }
-
+  
   return isAuthenticated ? <Outlet /> : <Navigate to={"/signin"} />
 }
 

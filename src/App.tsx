@@ -19,9 +19,14 @@ import AppLayout from "./layout/AppLayout";
 import { ScrollToTop } from "./components/common/ScrollToTop";
 import Home from "./pages/Dashboard/Home";
 import AuthRoutes from "./components/privateRoutes/AuthRoutes";
+import { useContext } from "react";
+import { AuthContext } from "./context/AuthContext.js";
 
 export default function App() {
-  return (
+
+  const { authChecked } = useContext(AuthContext) as { authChecked: boolean }
+
+  return !authChecked ? null : (
     <>
       <Router>
         <ScrollToTop />
@@ -62,7 +67,7 @@ export default function App() {
 
           {/* Auth Layout */}
           <Route path="/signin" element={<SignIn />} />
-          <Route path="/signup" element={<SignUp />} />
+          {/* <Route path="/signup" element={<SignUp />} /> */}
 
 
           {/* Fallback Route */}
