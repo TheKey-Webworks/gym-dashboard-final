@@ -1,5 +1,7 @@
 import React, { createContext, useState, ReactNode, useEffect } from "react";
-import { getLoginStatus } from "../api/authentication";
+import { getBasicUserData, getLoginStatus } from "../api/authentication";
+import store from "../redux/store";
+import { setUser } from "../redux/features/userdata/userdataSlice";
 
 // Definir la forma del contexto
 interface AuthContextType {
@@ -22,8 +24,10 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     useEffect(function () {
         getLoginStatus()
 
-            .then(function (d) {
+            .then(async function (d) {
                 setIsAuthenticated(d.isAuthenticated)
+                const userData = await getBasicUserData()
+                store.dispatch(setUser({ ...userData }))
             })
 
             .finally(function () {

@@ -1,4 +1,4 @@
-import { AxiosError } from "axios";
+import { Axios, AxiosError } from "axios";
 import platformApi from "./axioscfg"
 import Swal from "sweetalert2";
 
@@ -27,6 +27,7 @@ async function localLogin({ username, password }: LoginCredentials) {
     try {
         const response = await platformApi.post("/platform/authentication/login", { username, password })
         const data = response.data
+
         return { ...data, statusCode: response?.status }
     } catch (error) {
         const notSuccessResponse = error as AxiosError
@@ -74,5 +75,17 @@ async function logout(closeDropdown: Function) {
     }
 }
 
+async function getBasicUserData() {
+    try {
+        const response = await platformApi.get("/platform/authentication/get_basic_user")
+        const data = response.data
+        return { ...data, statusCode: response.status }
+    } catch (error) {
+        const d = error as AxiosError
+        const ud = d.response?.data as {}
+        return { ...ud, statusCode: d.status }
+    }
+}
 
-export { getLoginStatus, localLogin, logout }
+
+export { getLoginStatus, localLogin, logout, getBasicUserData }

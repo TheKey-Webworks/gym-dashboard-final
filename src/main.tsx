@@ -8,14 +8,16 @@ import App from "./App.tsx";
 import { AppWrapper } from "./components/common/PageMeta.tsx";
 import { ThemeProvider } from "./context/ThemeContext.tsx";
 import AuthProvider from "./context/AuthContext.tsx";
-
-
+import store from "./redux/store.ts";
+import { Provider } from 'react-redux'
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ThemeProvider>
       <AppWrapper>
         <AuthProvider>
-          <App />
+          <Provider store={store}>
+            <App />
+          </Provider>
         </AuthProvider>
       </AppWrapper>
     </ThemeProvider>
