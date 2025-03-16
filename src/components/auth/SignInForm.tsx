@@ -152,7 +152,7 @@ export default function SignInForm() {
                   </Link>
                 </div>
                 <div>
-                  <Button className="w-full" size="sm">
+                  <Button type="submit" className="w-full" size="sm">
                     Iniciar sesión
                   </Button>
                 </div>

@@ -3,6 +3,8 @@ import { Modal } from "../ui/modal";
 import Button from "../ui/button/Button";
 import Input from "../form/input/InputField";
 import Label from "../form/Label";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
 
 export default function UserMetaCard() {
   const { isOpen, openModal, closeModal } = useModal();
@@ -11,25 +13,29 @@ export default function UserMetaCard() {
     console.log("Saving changes...");
     closeModal();
   };
+
+  const userdata = useSelector((state: RootState) => state.userdata)
+
+
   return (
     <>
       <div className="p-5 border border-gray-200 rounded-2xl dark:border-gray-800 lg:p-6">
         <div className="flex flex-col gap-5 xl:flex-row xl:items-center xl:justify-between">
           <div className="flex flex-col items-center w-full gap-6 xl:flex-row">
             <div className="w-20 h-20 overflow-hidden border border-gray-200 rounded-full dark:border-gray-800">
-              <img src="/images/user/owner.jpg" alt="user" />
+              <img src="https://lh3.googleusercontent.com/a/ACg8ocJZxPlxJ0vdzQOgIHBG3o82Pemn_q90zSDx2hMrR_B5FpAfvr0=s288-c-no" alt="User" />
             </div>
             <div className="order-3 xl:order-2">
               <h4 className="mb-2 text-lg font-semibold text-center text-gray-800 dark:text-white/90 xl:text-left">
-                Federico Carusso
+                {`${userdata.firstName} ${userdata.lastName}`}
               </h4>
               <div className="flex flex-col items-center gap-1 text-center xl:flex-row xl:gap-3 xl:text-left">
                 <p className="text-sm text-gray-500 dark:text-gray-400">
-                  Team Manager
+                  <b>[{userdata.role?.toUpperCase()}]</b>
                 </p>
                 <div className="hidden h-3.5 w-px bg-gray-300 dark:bg-gray-700 xl:block"></div>
                 <p className="text-sm text-gray-500 dark:text-gray-400">
-                  Arizona, United States
+                  Hurlingham, Buenos Aires, Argentina
                 </p>
               </div>
             </div>
@@ -138,7 +144,7 @@ export default function UserMetaCard() {
                 fill=""
               />
             </svg>
-            Edit
+            Editar
           </button>
         </div>
       </div>
@@ -146,7 +152,7 @@ export default function UserMetaCard() {
         <div className="no-scrollbar relative w-full max-w-[700px] overflow-y-auto rounded-3xl bg-white p-4 dark:bg-gray-900 lg:p-11">
           <div className="px-2 pr-14">
             <h4 className="mb-2 text-2xl font-semibold text-gray-800 dark:text-white/90">
-              Edit Personal Information
+              Editar información personal
             </h4>
             <p className="mb-6 text-sm text-gray-500 dark:text-gray-400 lg:mb-7">
               Update your details to keep your profile up-to-date.

@@ -3,9 +3,13 @@ import { DropdownItem } from "../ui/dropdown/DropdownItem";
 import { Dropdown } from "../ui/dropdown/Dropdown";
 import { logout } from "../../api/authentication";
 import Button from "../ui/button/Button";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
 
 export default function UserDropdown() {
   const [isOpen, setIsOpen] = useState(false);
+
+  const userdata = useSelector((state: RootState) => state.userdata)
 
   function toggleDropdown() {
     setIsOpen(!isOpen);
@@ -24,8 +28,8 @@ export default function UserDropdown() {
           <img src="https://lh3.googleusercontent.com/a/ACg8ocJZxPlxJ0vdzQOgIHBG3o82Pemn_q90zSDx2hMrR_B5FpAfvr0=s288-c-no" alt="User" />
         </span>
 
-        <span className="block mr-1 font-medium text-theme-sm"><b>{`[Owner]`}</b></span>
-        <span className="block mr-1 font-medium text-theme-sm">Federico</span>
+        <span className="block mr-1 font-medium text-theme-sm"><b>{`[${userdata.role?.toUpperCase()}]`}</b></span>
+        <span className="block mr-1 font-medium text-theme-sm">{userdata.firstName}</span>
 
         <svg
           className={`stroke-gray-500 dark:stroke-gray-400 transition-transform duration-200 ${isOpen ? "rotate-180" : ""
@@ -53,10 +57,10 @@ export default function UserDropdown() {
       >
         <div>
           <span className="block font-medium text-gray-700 text-theme-sm dark:text-gray-400">
-            Federico Carusso
+            {`${userdata.firstName} ${userdata.lastName}`}
           </span>
           <span className="mt-0.5 block text-theme-xs text-gray-500 dark:text-gray-400">
-            fede123.fecka@gmail.com
+            {userdata.email}
           </span>
         </div>
 

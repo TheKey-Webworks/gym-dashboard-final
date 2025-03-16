@@ -21,6 +21,8 @@ import Home from "./pages/Dashboard/Home";
 import AuthRoutes from "./components/privateRoutes/AuthRoutes";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext.js";
+import GymsManager from "./pages/PlatformPages/GymsManager.js";
+import AddGym from "./pages/PlatformPages/AddGym.js";
 
 export default function App() {
 
@@ -61,7 +63,12 @@ export default function App() {
               {/* Charts */}
               <Route path="/line-chart" element={<LineChart />} />
               <Route path="/bar-chart" element={<BarChart />} />
+
+              {/* {gym manager} */}
+              <Route path="/gym-manager" element={<GymsManager />} />
+              <Route path="/add-gym" element={<AddGym />} />
             </Route>
+
           </Route>
 
 

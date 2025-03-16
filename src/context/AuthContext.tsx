@@ -20,7 +20,7 @@ interface AuthProviderProps {
 const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
     const [authChecked, setAuthChecked] = useState<boolean>(false)
-
+    
     useEffect(function () {
         getLoginStatus()
 
