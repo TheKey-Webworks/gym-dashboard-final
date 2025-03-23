@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ComponentCard from '../../components/common/ComponentCard';
 import Input from '../../components/form/input/InputField';
 import Label from '../../components/form/Label';
@@ -6,10 +6,30 @@ import Button from '../../components/ui/button/Button';
 import { ChevronDownIcon, ChevronUpIcon } from '../../icons';
 import { DropdownItem } from '../../components/ui/dropdown/DropdownItem';
 import { Link } from 'react-router';
+import { getAllGymUsersBasicData } from '../../api/gym-manager';
+import store, { RootState } from '../../redux/store';
+import { setUsers } from '../../redux/features/userdata/gymUsersBasicData';
+import { useSelector } from 'react-redux';
 
-const imgSrc = "https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/24e953b920a9cd0ff2e1d587742a2472/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg";
 
 const AddGym = () => {
+
+    const gymsData = useSelector((state: RootState) => state?.gymsData?.gymUsers) as []
+    useEffect(function () {
+
+
+        getAllGymUsersBasicData()
+            .then(data => {
+                const { data: usersData } = data
+                store.dispatch(setUsers(usersData))
+            })
+            .finally(() => {
+
+            })
+
+
+    }, [])
+
     // Estado inicial de los campos del formulario
     const initialState = {
         gymName: '',
@@ -81,7 +101,7 @@ const AddGym = () => {
                         </div>
 
                         {isDropdownOpen && (
-                            <div className="bg-white dark:bg-gray-700 p-4 rounded-lg shadow-lg dark:shadow-none">
+                            <div className="bg-white dark:bg-gray-900 p-4 rounded-lg shadow-lg dark:shadow-none">
                                 <h3 className="text-gray-800 dark:text-white mb-2">Buscar un usuario</h3>
                                 <div className="flex flex-col sm:flex-row items-center space-y-3 sm:space-x-3">
                                     <Input
@@ -94,10 +114,10 @@ const AddGym = () => {
                                 </div>
 
                                 <div className="mt-3 w-full border border-gray-200 dark:border-gray-600 shadow-lg rounded-lg">
-                                    {["Usuario 1", "Usuario 2", "Usuario 3", "Usuario 4"].map((user, index) => (
-                                        <DropdownItem key={index} className="text-gray-800 dark:text-white flex items-center p-3 hover:bg-gray-100 dark:hover:bg-gray-600">
-                                            <img src={imgSrc} alt={user} className="w-8 h-8 rounded-full mr-3" />
-                                            {user}
+                                    {gymsData.map((user: { id: string, firstName: string, lastName: string, profilePicture: string }) => (
+                                        <DropdownItem key={user?.id} className="text-gray-800 dark:text-white flex items-center p-3 hover:bg-gray-100 dark:hover:bg-gray-600">
+                                            <img src={user.profilePicture} alt={`${user.firstName}_${user.lastName}`} className="w-8 h-8 rounded-full mr-3" />
+                                            {user.firstName}
                                         </DropdownItem>
                                     ))}
                                 </div>

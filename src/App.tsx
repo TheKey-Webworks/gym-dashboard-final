@@ -19,15 +19,18 @@ import AppLayout from "./layout/AppLayout";
 import { ScrollToTop } from "./components/common/ScrollToTop";
 import Home from "./pages/Dashboard/Home";
 import AuthRoutes from "./components/privateRoutes/AuthRoutes";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "./context/AuthContext.js";
 import GymsManager from "./pages/PlatformPages/GymsManager.js";
 import AddGym from "./pages/PlatformPages/AddGym.js";
+import { UserDataContext } from "./context/UserDataContext.js";
 
 export default function App() {
 
   const { authChecked } = useContext(AuthContext) as { authChecked: boolean }
-
+  
+  useContext(UserDataContext)
+  
   return !authChecked ? null : (
     <>
       <Router>

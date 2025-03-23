@@ -1,15 +1,16 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { DropdownItem } from "../ui/dropdown/DropdownItem";
 import { Dropdown } from "../ui/dropdown/Dropdown";
 import { logout } from "../../api/authentication";
 import Button from "../ui/button/Button";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
+import { BasicUserDataType } from "../../redux/features/userdata/userdataSlice";
 
 export default function UserDropdown() {
   const [isOpen, setIsOpen] = useState(false);
 
-  const userdata = useSelector((state: RootState) => state.userdata)
+  const userdata = useSelector((store: RootState) => store?.userdata) as BasicUserDataType
 
   function toggleDropdown() {
     setIsOpen(!isOpen);

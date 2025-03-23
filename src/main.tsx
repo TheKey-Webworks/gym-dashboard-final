@@ -10,15 +10,18 @@ import { ThemeProvider } from "./context/ThemeContext.tsx";
 import AuthProvider from "./context/AuthContext.tsx";
 import store from "./redux/store.ts";
 import { Provider } from 'react-redux'
+import { UserDataProvider } from "./context/UserDataContext.tsx";
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ThemeProvider>
       <AppWrapper>
-        <AuthProvider>
-          <Provider store={store}>
-            <App />
-          </Provider>
-        </AuthProvider>
+        <Provider store={store}>
+          <AuthProvider>
+            <UserDataProvider>
+              <App />
+            </UserDataProvider>
+          </AuthProvider>
+        </Provider>
       </AppWrapper>
     </ThemeProvider>
   </StrictMode>

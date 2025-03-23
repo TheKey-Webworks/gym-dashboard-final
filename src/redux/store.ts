@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import userdataReducer from './features/userdata/userdataSlice'
+import gymBasicUsersdataReducer from './features/userdata/gymUsersBasicData'
 
 const store = configureStore({
     reducer: {
-        userdata: userdataReducer
+        userdata: userdataReducer,
+        gymsData: gymBasicUsersdataReducer
     },
     devTools: true
 })

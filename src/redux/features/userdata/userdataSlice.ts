@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface Userdata {
+export interface BasicUserDataType {
     id: string | null;
     firstName: string | null;
     lastName: string | null;
@@ -10,35 +10,36 @@ interface Userdata {
 
 
 
-const initialState: Userdata = {
-    id: null,
-    firstName: null,
-    lastName: null,
-    email: null,
-    role: null
+ const initialState: BasicUserDataType = {
+    id: "Cargando ...",
+    firstName: "Cargando ...",
+    lastName: "Cargando ...",
+    email: "Cargando ...",
+    role: "Cargando ..."
 };
 
 export const userdataSlice = createSlice({
     name: "userdata",
     initialState,
     reducers: {
-        setUser: (state, action: PayloadAction<Userdata>) => {
+        setBasicUserData: (state, action: PayloadAction<BasicUserDataType>) => {
+
             state.id = action.payload.id;
             state.firstName = action.payload.firstName;
             state.lastName = action.payload.lastName;
             state.email = action.payload.email;
             state.role = action.payload.role;
         },
-        clearUser: (state) => {
-            state.id = null;
-            state.firstName = null;
-            state.lastName = null;
-            state.email = null;
-            state.role = null;
+        clearBasicUserData: (state) => {
+            state.id = "Sin datos";
+            state.firstName = "Sin datos";
+            state.lastName = "Sin datos";
+            state.email = "Sin datos";
+            state.role = "Sin datos";
         },
     },
 });
 
 const userdataReducer = userdataSlice.reducer
-export const { setUser, clearUser } = userdataSlice.actions;
+export const { setBasicUserData, clearBasicUserData } = userdataSlice.actions;
 export default userdataReducer;
